@@ -12,24 +12,3 @@
     font-size: 20px;
 }
 
-.nav-end{
-    margin-left: auto;
-}
-
-.btn{
-    height: 40px;
-    margin: 0 10px;
-    border: solid black 2px;
-    background-color: transparent;
-    color: black;
-    border-radius: 20px;
-    width: 100px;
-    text-transform: capitalize;
-    font-weight: 400;
-    
-}
-
-.btn:hover{
-    background-color: black;
-    color: white;
-}

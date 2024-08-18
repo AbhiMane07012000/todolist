@@ -1,6 +1,7 @@
 const Todo = require('../model/todoModel')
 
 module.exports.createTask = async (req, res) => {
+    
     const { task } = req.body;
 
     // Ensure `task` is provided
@@ -28,5 +29,18 @@ module.exports.getAllTask = async(req,res)=>{
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Failed to get all tasks.' , status : false});
+    }
+}
+
+module.exports.deleteTask =async (req,res) =>{
+    console.log(req.params.id);
+    try {
+        const deletedTask = await Todo.findByIdAndDelete(req.params.id);
+        if(!deletedTask){
+            return res.status(404).json({ message: "User not found" });
+        }
+        res.json({ message: "Task deleted" });
+    } catch (error) {
+        res.status(500).json({ message: err.message });
     }
 }

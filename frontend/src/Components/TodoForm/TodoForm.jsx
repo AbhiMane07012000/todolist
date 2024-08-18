@@ -1,47 +1,61 @@
 import React, { Fragment, useState } from 'react'
 import './TodoForm.css'
-import { ToastContainer, toast } from 'react-toastify';
-import '../../../node_modules/react-toastify/dist/ReactToastify.css';
-import { createTask } from '../../utils/apiRoutes';
+import { createTaskRoute, getAllTask  } from '../../utils/apiRoutes';
 
 const TodoForm = () => {
 
 
-  const [task, setTask] = useState("")
+  const [taskval, setTask] = useState({
+    task:""
+  })
 
-  const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
-
-  const handleSubmit  = (e) =>{
-    e.preventDefault()
-    handleValidation()
+  const handleValidation = () => {
+    const {task} = taskval
+    if (task === "") {
+      alert("You must give some task to Add..!")
+      return false
+    }
+    return true
   }
 
-  const handleValidation = () =>{
-    if(task===""){
-      // toast.error("Paasword should be greater than 8 characters", toastOptions);
-      // return false;
+  const handleSubmit = async(e) => {
+    e.preventDefault()
+    if (handleValidation()) {
+      try{
+     
+        
+      const response = await fetch(createTaskRoute, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type to JSON
+        },
+        body: JSON.stringify(taskval),
+      });
+
+      const data = await response.json();
+      
+      setTask({ task: "" });
+      } catch(err){
+        console.log(err);
+      }
     }
   }
 
+
+
   const handleOnChange = (event) => {
-    setTask(event.target.value);
+    setTask({[event.target.name]: event.target.value});
   };
 
   return (
     <Fragment>
-      
-          <form className='hero' onSubmit={(e) => handleSubmit(e)}>
-            <input className='task' name='task' type="text" placeholder='Enter Task' onChange={(e)=>{handleOnChange(e)}} />
-            <button className='btn' type="submit">Add Task</button>
-          </form>
-          <ToastContainer />
-       
+
+      <form className='hero' onSubmit={(e) => handleSubmit(e)}>
+        <input className='task' value={taskval.task}  name='task' type="text" placeholder='Enter Task' onChange={(e) => { handleOnChange(e) }} />
+        <button className='btn' type="submit">Add Task</button>
+      </form>
+
+
     </Fragment>
   )
 }
