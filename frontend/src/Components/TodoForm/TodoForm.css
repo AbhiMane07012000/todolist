@@ -1,0 +1,48 @@
+.hero{
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task{
+    font-size: 18px;
+	padding: 5px 10px;
+	width: 50%;
+	outline: none;
+	background: #FFFFFF;
+	color: #000000;
+	border: 1px solid #C4D1EB;
+	border-radius: 5px;
+	box-shadow: 3px 3px 2px 0px #E2E2E2;
+	transition: .3s ease;
+    padding:15px ;
+}
+
+.task:focus {
+	background: #F2F2F2;
+	border: 1px solid #000000;
+	border-radius: 10px;
+}
+
+.task::placeholder {
+	color: #c4c2c2;
+}
+
+.btn{
+    height: 40px;
+    margin: 0 10px;
+    border: solid black 2px;
+    background-color: transparent;
+    color: black;
+    border-radius: 20px;
+    width: 100px;
+    text-transform: capitalize;
+    font-weight: 400;
+    
+}
+
+.btn:hover{
+    background-color: black;
+    color: white;
+}

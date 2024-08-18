@@ -1,0 +1,29 @@
+.items{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 80px;
+}
+
+.item{
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    padding: 10px;
+    border: solid black 1px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 2px 0px #2e2e2e;
+}
+
+.taskhead{
+    padding: 0 10px;
+}
+
+.operations{
+    margin-left: auto;
+    align-self:flex-end;
+}
+
+.operation{
+    margin: 10px;
+}
