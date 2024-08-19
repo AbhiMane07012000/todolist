@@ -33,14 +33,30 @@ module.exports.getAllTask = async(req,res)=>{
 }
 
 module.exports.deleteTask =async (req,res) =>{
-    console.log(req.params.id);
     try {
         const deletedTask = await Todo.findByIdAndDelete(req.params.id);
         if(!deletedTask){
             return res.status(404).json({ message: "User not found" });
         }
-        res.json({ message: "Task deleted" });
+        res.status(200).json({ message: "Task deleted" });
     } catch (error) {
         res.status(500).json({ message: err.message });
     }
+}
+
+module.exports.updateTask = async (req,res) =>{
+
+    try {
+        const {task}  = req.body 
+        
+        const updateTask = await Todo.findByIdAndUpdate(req.params.id, {task} , {new:true});
+        if(!updateTask){
+            return res.status(404).json({message:"Task not Found"})
+        }
+        res.json(updateTask);
+    } catch (error) {
+        res.status(500).json({message:err.message})    
+    }   
+
+
 }
